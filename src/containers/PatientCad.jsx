@@ -1,12 +1,51 @@
-import React from "react";
+import React,  { useRef } from "react";
 import { Tabs, Tab, Row, Col } from "react-materialize";
 import PatientDataCad from "./cadastro/PatientDataCad";
 import PatientDataClin from "./cadastro/PatientDataClin";
 import PatientDataLab from "./cadastro/PatientDataLab";
+import * as Yup from "yup";
 
 import Header from "./Header";
 
 export default () => {
+
+  const formRef = useRef(null);
+
+  async function handleSumit(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required("O nome e obrigatorio"),
+        email: Yup.string().required("email obrigatorio"),
+        address: Yup.object().shape({
+          street: Yup.string()
+            .min(3, "no minimo 3 caracteres")
+            .required("cidade e obrigatoria"),
+        }),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+      console.log(data);
+
+      reset();
+    } catch (err) {
+      console.log("before " + err);
+      if (err instanceof Yup.ValidationError) {
+        const errorMessages = {};
+        console.log(err.errors);
+        err.errors.forEach((error) => {
+          //esta undefined
+          console.log("akaksk " + error);
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+      }
+    }
+  }
+
+
   return (
     <div>
       <Header></Header>
