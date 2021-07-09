@@ -3,7 +3,8 @@ import { Form } from "@unform/web";
 import Input from "../../components/form/Input";
 import { Scope } from "@unform/core";
 import * as Yup from "yup";
-import { Row, Col, CardPanel } from "react-materialize";
+import { Row, Col, CardPanel, Card } from "react-materialize";
+import MaskedInput from "../../components/form/MaskedInput";
 
 const initialData = {
   email: "lalakagawa@Hotmail.com",
@@ -62,100 +63,138 @@ export default () => {
       <Row>
         <Col m={12}>
           <CardPanel>
-            DADOS DO PACIENTE
             <Form
               ref={formRef}
               initialData={initialData}
               onSubmit={handleSumit}
             >
               <Row>
+                <Col s={12}>
+                  <Card title="NS1">
+                    <Row>
+                      <Col s={2} className="input-field">
+                        <MaskedInput
+                          name="dataNs1Coleta"
+                          id="dataNs1Coleta"
+                          type="text"
+                          mask="99/99/9999"
+                        />
+                        <label for="dataNs1Coleta">Data da Coleta</label>
+                      </Col>
+                      <Col s={3} className="input-field">
+                        <Input
+                          name="resultadoNs1"
+                          id="resultadoNs1"
+                          type="text"
+                        />
+                        <label for="resultadoNs1">Resultado</label>
+                      </Col>
+                      <Col s={2} className="input-field">
+                        <MaskedInput
+                          name="dataSorologiaChikungunya"
+                          id="dataSorologiaChikungunya"
+                          type="text"
+                          mask="99/99/9999"
+                        />
+                        <label for="dataSorologiaChikungunya">
+                          Data da Sorologia Chikungunya
+                        </label>
+                      </Col>
+                      <Col s={3} className="input-field">
+                        <Input
+                          name="resultadoSorologiaChikungunya"
+                          id="resultadoSorologiaChikungunya"
+                          type="text"
+                        />
+                        <label for="resultadoSorologiaChikungunya">
+                          Resultado
+                        </label>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              </Row>
+              <Row>
+                <Col s={12}>
+                  <Card title="Sorologia Dengue (IgM)">
+                    <Row>
+                      <Col s={2} className="input-field">
+                        <MaskedInput
+                          name="dataSorologiaDengue"
+                          id="dataSorologiaDengue"
+                          type="text"
+                          mask="99/99/9999"
+                        />
+                        <label for="dataSorologiaDengue">Data da Coleta</label>
+                      </Col>
+                      <Col s={3} className="input-field">
+                        <Input
+                          name="resultadoSorologiaDengue"
+                          id="resultadoSorologiaDengue"
+                          type="text"
+                        />
+                        <label for="resultadoSorologiaDengue">Resultado</label>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              </Row>
+
+              <Row>
                 <Col s={3} className="input-field">
-                  <Input name="cns" id="cns" type="text" />
-                  <label for="cns">CNS*</label>
+                  <Input name="sorotipo" id="sorotipo" type="text" />
+                  <label for="sorotipo">Sorotipo</label>
                 </Col>
-                <Col s={5} className="input-field">
-                  <Input name="nomeCompleto" id="nomeCompleto" type="text" />
-                  <label for="cns">Nome Completo</label>
-                </Col>
-                <Col s={2} className="input-field">
+                <Col s={3} className="input-field">
                   <Input
-                    name="dataNascimento"
-                    id="dataNascimento"
+                    name="histopatologia"
+                    id="histopatologia"
                     type="text"
                   />
-                  <label for="dataNascimento">Data Nascimento</label>
+                  <label for="histopatologia">Histopatologia</label>
                 </Col>
-                <Col s={2} className="input-field">
-                  <Input name="sexo" id="sexo" type="text" />
-                  <label for="sexo">Sexo</label>
+                <Col s={3} className="input-field">
+                  <Input
+                    name="imunohistoquimica"
+                    id="imunohistoquimica"
+                    type="text"
+                  />
+                  <label for="imunohistoquimica">Imunohistoquimica</label>
+                </Col>
+              </Row>
+              <Row>
+                <Col s={12}>
+                  <Card title="Hospitalizacao">
+                    <Row>
+                      <Col s={2} className="input-field">
+                        <MaskedInput name="dataHospitalizacao" id="dataHospitalizacao" type="text" mask="99/99/9999" />
+                        <label for="dataHospitalizacao">Data da Internacao</label>
+                      </Col>
+                      <Col s={3} className="input-field">
+                        <Input name="nomeHospital" id="nomeHospital" type="text" />
+                        <label for="nomeHospital">Nome do Hospital</label>
+                      </Col>
+                      <Col s={2} className="input-field">
+                        <Input name="telefoneHospital" id="telefoneHospital" type="text" />
+                        <label for="telefoneHospital">Telefone</label>
+                      </Col>
+                      <Col s={2} className="input-field">
+                        <Input name="estadoHospital" id="estadoHospital" type="text" />
+                        <label for="estadoHospital">Estado</label>
+                      </Col>
+                      <Col s={3} className="input-field">
+                        <Input name="cidadeHospital" id="cidadeHospital" type="text" />
+                        <label for="cidadeHospital">Cidade</label>
+                      </Col>
+                    </Row>
+                  </Card>
                 </Col>
               </Row>
 
               <Row>
-                <Col s={3} className="input-field">
-                  <Input name="racaCor" id="racaCor" type="text" />
-                  <label for="racaCor">Raca</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="rg" id="rg" type="text" />
-                  <label for="rg">RG</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="cpf" id="cpf" type="text" />
-                  <label for="cpf">CPF</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="telefone" id="telefone" type="text" />
-                  <label for="telefone">Telefone</label>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col s={5} className="input-field">
-                  <Input name="nomeMae" id="nomeMae" type="text" />
-                  <label for="nomeMae">Nome Mae</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="escolaridade" id="escolaridade" type="text" />
-                  <label for="escolaridade">Escolaridade</label>
-                </Col>
-                <Col s={2} className="input-field">
-                  <Input name="zona" id="zona" type="text" />
-                  <label for="zona">Zona</label>
-                </Col>
-                <Col s={2} className="input-field">
-                  <Input name="pais" id="pais" type="text" />
-                  <label for="pais">Pais</label>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col s={3} className="input-field">
-                  <Input name="estado" id="estado" type="text" />
-                  <label for="estado">Estado</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="cidade" id="cidade" type="text" />
-                  <label for="cidade">Cidade</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="cep" id="cep" type="text" />
-                  <label for="cep">CEP</label>
-                </Col>
-                <Col s={3} className="input-field">
-                  <Input name="bairro" id="bairro" type="text" />
-                  <label for="bairro">Bairro</label>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col s={5} className="input-field">
-                  <Input name="endereco" id="endereco" type="text" />
-                  <label for="endereco">Endereco</label>
-                </Col>
-                <Col s={2} className="input-field">
-                  <Input name="numero" id="numero" type="text" />
-                  <label for="numero">Numero</label>
+                <Col s={12} className="input-field">
+                  <Input name="observacoes" id="observacoes" type="text" />
+                  <label for="observacoes">Observacoes</label>
                 </Col>
               </Row>
               {/* <Input type="password" name="password" />
