@@ -1,73 +1,16 @@
 import React, { useRef } from "react";
-import { Form } from "@unform/web";
 import Input from "../../components/form/Input";
-import { Scope } from "@unform/core";
-import * as Yup from "yup";
 import { Row, Col, CardPanel, Card } from "react-materialize";
 import MaskedInput from "../../components/form/MaskedInput";
-
-const initialData = {
-  email: "lalakagawa@Hotmail.com",
-};
+import { Scope } from "@unform/core";
 
 export default () => {
-  const formRef = useRef(null);
-
-  async function handleSumit(data, { reset }) {
-    try {
-      const schema = Yup.object().shape({
-        name: Yup.string().required("O nome e obrigatorio"),
-        email: Yup.string().required("email obrigatorio"),
-        address: Yup.object().shape({
-          street: Yup.string()
-            .min(3, "no minimo 3 caracteres")
-            .required("cidade e obrigatoria"),
-        }),
-      });
-
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-      console.log(data);
-
-      reset();
-    } catch (err) {
-      console.log("before " + err);
-      if (err instanceof Yup.ValidationError) {
-        const errorMessages = {};
-        console.log(err.errors);
-        err.errors.forEach((error) => {
-          //esta undefined
-          console.log("akaksk " + error);
-          errorMessages[error.path] = error.message;
-        });
-
-        formRef.current.setErrors(errorMessages);
-      }
-    }
-
-    // if(data.name === "") {
-    //   //formRef.current.setFieldError('name', 'o nome e obrigatorio')
-
-    //   formRef.current.setErrors({
-    //     name: 'o nomeeee',
-    //     address:{
-    //       street: 'cidadeeeee obr'
-    //     }
-    //   })
-    // }
-  }
-
   return (
     <div>
-      <Row>
-        <Col m={12}>
-          <CardPanel>
-            <Form
-              ref={formRef}
-              initialData={initialData}
-              onSubmit={handleSumit}
-            >
+      <Scope path="dadosLaboratorial">
+        <Row>
+          <Col m={12}>
+            <CardPanel>
               <Row>
                 <Col s={12}>
                   <Card title="NS1">
@@ -167,23 +110,46 @@ export default () => {
                   <Card title="Hospitalizacao">
                     <Row>
                       <Col s={2} className="input-field">
-                        <MaskedInput name="dataHospitalizacao" id="dataHospitalizacao" type="text" mask="99/99/9999" />
-                        <label for="dataHospitalizacao">Data da Internacao</label>
+                        <MaskedInput
+                          name="dataHospitalizacao"
+                          id="dataHospitalizacao"
+                          type="text"
+                          mask="99/99/9999"
+                        />
+                        <label for="dataHospitalizacao">
+                          Data da Internacao
+                        </label>
                       </Col>
                       <Col s={3} className="input-field">
-                        <Input name="nomeHospital" id="nomeHospital" type="text" />
+                        <Input
+                          name="nomeHospital"
+                          id="nomeHospital"
+                          type="text"
+                        />
                         <label for="nomeHospital">Nome do Hospital</label>
                       </Col>
                       <Col s={2} className="input-field">
-                        <Input name="telefoneHospital" id="telefoneHospital" type="text" />
+                        <Input
+                          name="telefoneHospital"
+                          id="telefoneHospital"
+                          type="text"
+                        />
                         <label for="telefoneHospital">Telefone</label>
                       </Col>
                       <Col s={2} className="input-field">
-                        <Input name="estadoHospital" id="estadoHospital" type="text" />
+                        <Input
+                          name="estadoHospital"
+                          id="estadoHospital"
+                          type="text"
+                        />
                         <label for="estadoHospital">Estado</label>
                       </Col>
                       <Col s={3} className="input-field">
-                        <Input name="cidadeHospital" id="cidadeHospital" type="text" />
+                        <Input
+                          name="cidadeHospital"
+                          id="cidadeHospital"
+                          type="text"
+                        />
                         <label for="cidadeHospital">Cidade</label>
                       </Col>
                     </Row>
@@ -202,11 +168,10 @@ export default () => {
           <Input name="street" />
           <Input name="numb" />
         </Scope> */}
-              <button type="submit">Enviar</button>
-            </Form>
-          </CardPanel>
-        </Col>
-      </Row>
+            </CardPanel>
+          </Col>
+        </Row>
+      </Scope>
     </div>
   );
 };
